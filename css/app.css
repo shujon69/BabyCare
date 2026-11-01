@@ -1,0 +1,219 @@
+/* ============================================================
+   app.css — মোবাইল অ্যাপ লেয়ার (বটম ট্যাব, শিট, স্প্ল্যাশ, ইনস্টল, অফলাইন)
+   style.css-এর পরে লোড হয়; আগের ডিজাইন বদলায় না।
+   ============================================================ */
+:root{--tab-h:64px;--sat:env(safe-area-inset-top,0px);--sab:env(safe-area-inset-bottom,0px)}
+
+a,button{touch-action:manipulation}
+header{padding-top:var(--sat)}
+
+/* ---------- স্প্ল্যাশ ---------- */
+.app-splash{display:none;position:fixed;inset:0;z-index:3000;background:var(--paper,#F7F0E1);flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:24px;
+  transition:opacity .4s ease,visibility .4s ease;animation:splashSafety .4s ease 2.2s forwards}
+html.splash-on .app-splash{display:flex}
+.app-splash.hide{opacity:0;visibility:hidden}
+.app-splash img{width:112px;height:112px;border-radius:50%;box-shadow:0 18px 40px -18px rgba(30,59,42,.55);animation:splashPop .7s cubic-bezier(.2,.9,.3,1.2) both}
+.app-splash b{font-size:22px;color:var(--green,#1E3B2A);font-weight:700;margin-top:8px}
+.app-splash span{font-size:14.5px;color:var(--ink-soft,#6B5942)}
+@keyframes splashPop{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes splashSafety{to{opacity:0;visibility:hidden}}
+
+/* ---------- বটম ট্যাব বার ---------- */
+.app-tabs{display:none}
+.app-sheet-bg,.app-sheet{display:none}
+
+@media (max-width:760px){
+  html{scroll-padding-top:calc(76px + var(--sat))}
+  body{padding-bottom:calc(var(--tab-h) + var(--sab))}
+  .menu-btn,.nav-links{display:none!important}
+
+  .app-tabs{
+    position:fixed;left:0;right:0;bottom:0;z-index:960;display:grid;grid-template-columns:repeat(5,1fr);
+    height:calc(var(--tab-h) + var(--sab));padding-bottom:var(--sab);
+    background:var(--cream,#FFFBF2);border-top:1px solid var(--line);
+    box-shadow:0 -10px 26px -18px rgba(0,0,0,.45);
+    -webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+  .app-tab{
+    appearance:none;-webkit-appearance:none;background:none;border:0;font:inherit;cursor:pointer;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+    color:var(--ink-soft,#6B5942);text-decoration:none;position:relative;min-width:0;
+    -webkit-tap-highlight-color:transparent;transition:color .2s ease}
+  .app-tab svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;transition:transform .25s cubic-bezier(.2,.9,.3,1.3)}
+  .app-tab svg .dots{fill:currentColor;stroke:none}
+  .app-tab span{font-size:11.5px;line-height:1.1;font-weight:600;white-space:nowrap}
+  .app-tab.on{color:var(--green-2,#2E5B40)}
+  .app-tab.on svg{transform:translateY(-2px) scale(1.1)}
+  .app-tab.on::before{content:"";position:absolute;top:0;left:50%;width:30px;height:3px;margin-left:-15px;border-radius:0 0 4px 4px;background:var(--terra,#C2522D)}
+  .app-tab:active svg{transform:scale(.9)}
+
+  .to-top{bottom:calc(var(--tab-h) + var(--sab) + 14px);right:14px;width:46px;height:46px}
+  #toast{bottom:calc(var(--tab-h) + var(--sab) + 18px)}
+}
+
+/* ---------- "আরও" বটম শিট ---------- */
+@media (max-width:760px){
+  .app-sheet-bg{display:block;position:fixed;inset:0;z-index:1100;background:rgba(20,16,10,.52);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);opacity:0;visibility:hidden;transition:.28s ease}
+  .app-sheet{display:block;position:fixed;left:0;right:0;bottom:0;z-index:1110;max-height:84vh;overflow-y:auto;overscroll-behavior:contain;
+    background:var(--cream,#FFFBF2);border-radius:22px 22px 0 0;padding:10px 18px calc(18px + var(--sab));
+    box-shadow:0 -20px 50px -20px rgba(0,0,0,.5);transform:translateY(102%);visibility:hidden;transition:transform .32s cubic-bezier(.2,.8,.2,1),visibility .32s}
+  html.sheet-open{overflow:hidden}
+  html.sheet-open .app-sheet-bg{opacity:1;visibility:visible}
+  html.sheet-open .app-sheet{transform:none;visibility:visible}
+  .app-sheet .grip{width:42px;height:5px;border-radius:5px;background:var(--line);margin:2px auto 12px}
+  .app-sheet h4{font-size:15px;color:var(--ink-soft,#6B5942);font-weight:600;margin:14px 2px 8px}
+  .sheet-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .sheet-grid a,.sheet-row{
+    display:flex;align-items:center;gap:10px;min-height:52px;padding:10px 14px;border-radius:14px;
+    background:var(--paper,#F7F0E1);border:1px solid var(--line);color:var(--ink,#241A0F);
+    text-decoration:none;font:inherit;font-size:15.5px;font-weight:600;line-height:1.3;text-align:left;cursor:pointer;width:100%}
+  .sheet-row{margin-top:8px}
+  .sheet-row[hidden]{display:none}
+  .sheet-grid a:active,.sheet-row:active{transform:scale(.98)}
+  .sheet-grid i,.sheet-row i{font-style:normal;font-size:20px;flex:none}
+  .sheet-row small{display:block;font-weight:400;font-size:12.5px;color:var(--ink-soft,#6B5942)}
+  .sheet-ver{text-align:center;font-size:12px;color:var(--ink-soft,#6B5942);margin-top:14px}
+}
+
+/* ---------- ইনস্টল কার্ড ---------- */
+.app-install{display:none;position:fixed;left:12px;right:12px;bottom:calc(var(--tab-h) + var(--sab) + 12px);z-index:970;
+  background:var(--green,#1E3B2A);color:#FBF5E8;border-radius:18px;padding:14px 14px 14px 16px;gap:12px;align-items:center;
+  box-shadow:0 18px 40px -16px rgba(0,0,0,.6);animation:slideUp .45s cubic-bezier(.2,.8,.2,1) both}
+.app-install.show{display:flex}
+.app-install img{width:44px;height:44px;border-radius:12px;flex:none;background:#fff}
+.app-install .t{flex:1;min-width:0;line-height:1.4}
+.app-install .t b{display:block;font-size:15.5px}
+.app-install .t span{font-size:13px;opacity:.85}
+.app-install button{appearance:none;border:0;font:inherit;cursor:pointer;border-radius:999px}
+.app-install .go{background:var(--amber,#DFA23F);color:#241A0F;font-weight:700;font-size:14.5px;padding:10px 16px;flex:none}
+.app-install .x{background:transparent;color:#FBF5E8;font-size:18px;width:34px;height:34px;opacity:.8;flex:none}
+@media (min-width:761px){.app-install{bottom:18px;left:auto;right:18px;width:380px}}
+@keyframes slideUp{from{transform:translateY(30px);opacity:0}to{transform:none;opacity:1}}
+
+/* ---------- স্ন্যাকবার (আপডেট / অফলাইন) ---------- */
+.app-snack{position:fixed;left:12px;right:12px;bottom:calc(var(--tab-h) + var(--sab) + 12px);z-index:1300;display:none;align-items:center;gap:12px;
+  background:var(--ink,#241A0F);color:var(--cream,#FFFBF2);padding:12px 14px 12px 18px;border-radius:14px;font-size:14.5px;line-height:1.4;box-shadow:var(--shadow);animation:slideUp .35s ease both}
+.app-snack.show{display:flex}
+.app-snack span{flex:1}
+.app-snack button{appearance:none;border:0;background:var(--amber,#DFA23F);color:#241A0F;font:inherit;font-weight:700;font-size:14px;padding:8px 14px;border-radius:999px;cursor:pointer}
+.app-snack.offline{background:#7A3B1F}
+@media (min-width:761px){.app-snack{bottom:18px;left:50%;right:auto;transform:translateX(-50%);min-width:320px}}
+
+/* ---------- অ্যাপ মোড (ইনস্টল করা অবস্থায়) ---------- */
+@media (display-mode:standalone){
+  html,body{overscroll-behavior-y:none}
+  body{-webkit-touch-callout:none}
+  input,textarea,.recipe,.rtools,p,li,td,th{-webkit-user-select:text;user-select:text}
+  .brand-mark+div span{display:none}
+}
+
+/* ---------- ডার্ক মোড ---------- */
+:root[data-theme="dark"] .app-tabs{background:#161C15;box-shadow:0 -10px 26px -18px rgba(0,0,0,.9)}
+:root[data-theme="dark"] .app-sheet{background:#1D251C}
+:root[data-theme="dark"] .sheet-grid a,:root[data-theme="dark"] .sheet-row{background:#161C15}
+:root[data-theme="dark"] .app-install{background:#2C5340}
+:root[data-theme="dark"] .app-splash b{color:#86C79E}
+:root[data-theme="dark"] .app-snack{background:#2E3A2B}
+:root[data-theme="dark"] .app-snack.offline{background:#6B2E14}
+
+@media print{.app-tabs,.app-sheet,.app-sheet-bg,.app-install,.app-snack,.app-splash{display:none!important}body{padding-bottom:0!important}}
+
+/* ============================================================
+   মোবাইল রেসপন্সিভ — চার্ট · পরিমাণ হিসাব · ট্র্যাকিং · রিমাইন্ডার · সূচিপত্র · রেসিপি
+   ============================================================ */
+@media (max-width:600px){
+  :root{--gut:18px}
+
+  /* ---- ১. বয়স অনুযায়ী চার্ট: সোয়াইপ ট্যাব ---- */
+  #chartTabs{flex-wrap:nowrap;overflow-x:auto;gap:8px;margin:0 calc(-1*var(--gut)) 16px;padding:4px var(--gut) 10px;
+    scroll-snap-type:x proximity;scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+  #chartTabs::-webkit-scrollbar{display:none}
+  #chartTabs .tab-btn{flex:none;white-space:nowrap;scroll-snap-align:center;min-height:44px;padding:9px 18px;font-size:14.5px;border-radius:999px}
+  #printRow .btn{width:100%}
+
+  /* ---- ২. টেবিল → কার্ড (সময়সূচি ও উপকরণ) ---- */
+  .table-wrap{overflow:visible;margin:0;border-radius:0}
+  .table-wrap table,.table-wrap table.sched{min-width:0;width:100%;font-size:14.5px;border-collapse:separate;border-spacing:0}
+  table.rt-stack thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  table.rt-stack,table.rt-stack tbody{display:block;background:none}
+  table.rt-stack td[data-empty]{display:none!important}
+
+  /* সময়সূচি: প্রতিটি সারি এক কার্ড */
+  table.sched.rt-stack tr{display:block;background:var(--paper,#F7F0E1);border:1px solid var(--line);border-radius:14px;margin-bottom:10px;overflow:hidden}
+  table.sched.rt-stack td{display:flex;gap:12px;justify-content:space-between;align-items:baseline;padding:9px 14px;border:0;text-align:right;line-height:1.5}
+  table.sched.rt-stack td::before{content:attr(data-label);flex:none;font-size:12.5px;font-weight:600;color:var(--ink-soft,#6B5942);text-align:left}
+  table.sched.rt-stack td:first-child{background:var(--green,#1E3B2A);color:#FBF5E8;font-weight:700;justify-content:flex-start;text-align:left;font-size:15px}
+  table.sched.rt-stack td:first-child::before{display:none}
+  table.sched.rt-stack td+td{border-top:1px dashed var(--line)}
+  table.sched.rt-stack td:first-child+td{border-top:0}
+  table.sched.rt-stack td:nth-child(2){font-weight:600;color:var(--ink,#241A0F)}
+
+  /* উপকরণ: নাম + পরিমাণ এক লাইনে, ঘরোয়া মাপ নিচে */
+  table.rt-stack:not(.sched) tr{display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:baseline;padding:10px 4px;border-bottom:1px solid var(--line);background:none!important}
+  table.rt-stack:not(.sched) tr:last-child{border-bottom:0}
+  table.rt-stack:not(.sched) td{display:block;padding:0;border:0;background:none}
+  table.rt-stack:not(.sched) td{font-size:15px;text-align:left}
+  table.rt-stack:not(.sched) td:nth-child(1){font-weight:700;color:var(--ink,#241A0F);font-size:15.5px}
+  table.rt-stack:not(.sched) td:nth-child(2){text-align:right;font-weight:700;color:var(--green-2,#2E5B40);white-space:nowrap}
+  table.rt-stack:not(.sched) td:nth-child(2)::before{content:attr(data-label) ": ";font-size:12px;font-weight:500;color:var(--ink-soft,#6B5942)}
+  table.rt-stack:not(.sched) td:nth-child(3){grid-column:1/-1;font-size:13px;color:var(--ink-soft,#6B5942);text-align:left}
+  table.rt-stack:not(.sched) td:nth-child(3)::before{content:attr(data-label) ": "}
+
+  /* ---- ৩. পরিমাণ বোঝার সহজ হিসাব: পাশাপাশি কমপ্যাক্ট কার্ড ---- */
+  .portion{gap:10px}
+  .portion .pcard{display:grid;grid-template-columns:52px 1fr;grid-template-areas:"i h" "i p";column-gap:14px;row-gap:2px;align-items:center;text-align:left;padding:14px 16px}
+  .pcard .icon{grid-area:i;width:52px;height:52px;margin:0;font-size:19px}
+  .pcard h4{grid-area:h;margin:0;font-size:1.05rem}
+  .pcard p{grid-area:p;font-size:13.5px;line-height:1.6}
+
+  /* ---- ৪. দৈনিক ট্র্যাকিং ---- */
+  .track-shell .box-title{display:block;line-height:1.35}
+  .track-shell .box-title::after{display:none}
+  .date-label{display:block;margin-top:4px;font-size:13px;letter-spacing:.02em}
+  .track-item{grid-template-columns:1fr 64px;grid-template-areas:"time time" "food btn";gap:4px 12px;align-items:center;padding:12px 14px}
+  .track-item .ti-time{grid-area:time;font-size:13.5px}
+  .track-item .ti-food{grid-area:food;min-width:0}
+  .track-item .t-btn{grid-area:btn;width:64px;min-height:46px;padding:0;font-size:15px}
+  .track-item.done .t-btn{background:var(--green,#1E3B2A);border-color:var(--green,#1E3B2A);color:#FBF5E8}
+  .track-actions .btn{min-height:50px}
+  .profile-row .field input,.profile-row .field select{font-size:16px} /* iOS জুম বন্ধ */
+
+  /* ---- ৫. খাবারের সময় রিমাইন্ডার ---- */
+  .rem-shell{padding:16px 14px}
+  .rem-item{grid-template-columns:1fr auto auto;grid-template-areas:"time on del" "label label label";gap:10px;padding:12px}
+  .rem-item input[type=time]{grid-area:time;font-size:16px;min-width:0}
+  .rem-item input[type=text]{grid-area:label;font-size:16px}
+  .rem-item .t-btn[data-act=on]{grid-area:on;width:auto;min-width:64px;min-height:44px;padding:0 14px}
+  .rem-item .t-btn[data-act=del]{grid-area:del;width:44px;min-height:44px;padding:0}
+  .rem-actions .t-btn,.rem-actions .btn{flex:1 1 100%;width:100%;min-height:48px}
+
+  /* ---- ৬. সূচিপত্র ---- */
+  .idx{gap:8px}
+  .idx>*{min-height:58px;padding:10px 14px}
+
+  /* ---- ৭. রেসিপি ও প্রস্তুত প্রণালী ---- */
+  .rtools{gap:8px;margin-bottom:18px}
+  .rtools input#rSearch{flex:1 1 100%;font-size:16px;padding:12px 16px}
+  .rtools select#rAge{flex:1 1 0;min-width:0;font-size:15px;padding:11px 14px}
+  .rtools #rFav{flex:none;min-height:44px;padding:9px 16px;font-size:14.5px}
+  .rtools #rCount{flex:1 1 100%;font-size:13px;color:var(--ink-soft,#6B5942)}
+  .recipe{padding:22px 16px}
+  .recipe-head .tagline{gap:8px}
+  .recipe-head h3{line-height:1.25}
+  .recipe-head .t-btn,.rbtns .t-btn{width:auto;min-height:44px;padding:8px 18px}
+  .nutri{grid-template-columns:repeat(2,1fr)}
+  .nutri>*:last-child:nth-child(odd){grid-column:1/-1}
+  .recipe .steps li,.recipe ol li{overflow-wrap:anywhere}
+}
+@media (max-width:480px){ :root{--gut:14px} }
+@media (max-width:340px){
+  .app-tab span{font-size:10.5px}
+  .track-item{grid-template-columns:1fr 56px}
+  .track-item .t-btn{width:56px}
+  .rem-item .t-btn[data-act=on]{min-width:56px;padding:0 10px}
+}
+
+/* ট্যাবলেট (৬০১–৯০০): ২-কলাম সূচিপত্র ও পরিমাণ কার্ড */
+@media (min-width:601px) and (max-width:900px){
+  .table-wrap table.sched{min-width:0}
+  .portion{grid-template-columns:repeat(3,1fr)}
+}
