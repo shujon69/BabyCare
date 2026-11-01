@@ -1,5 +1,6 @@
 /* ============================================================
    শিশুদের পরিপূরক খাদ্য ও সুস্থ থাকার গাইড — সম্পূর্ণ স্টাইল
+   Mobile Responsive Fixed Version
    ============================================================ */
 
 :root{--paper:#F7F0E1;--paper-2:#EFE3CC;--cream:#FFFBF2;--ink:#241A0F;--ink-soft:#6B5942;--green:#1E3B2A;--green-2:#2E5B40;--terra:#C2522D;--amber:#DFA23F;--line:rgba(36,26,15,.15);--shadow:0 22px 50px -28px rgba(36,26,15,.45)}
@@ -14,8 +15,7 @@ img,svg{max-width:100%;height:auto}
 header{position:sticky;top:0;z-index:900;background:rgba(247,240,225,.88);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
 .nav{display:flex;align-items:center;justify-content:space-between;gap:22px;height:76px}
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink);flex-shrink:1;min-width:0}
-.brand-mark{width:38px;height:38px;border-radius:50%;background:var(--green);position:relative;flex:none}
-.brand-mark::after{content:"";position:absolute;inset:9px;border-radius:50%;border:2px dashed var(--amber)}
+.brand-mark{width:42px;height:42px;border-radius:50%;object-fit:cover;flex:none;border:2px solid var(--amber);background:var(--green)}
 .brand b{font-family:'Tiro Bangla',serif;font-size:19px;font-weight:400;display:block;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .brand span{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);white-space:nowrap;display:block}
 .nav-links{display:flex;gap:4px;align-items:center;flex-wrap:wrap}
@@ -30,6 +30,8 @@ header{position:sticky;top:0;z-index:900;background:rgba(247,240,225,.88);-webki
 .theme-btn svg{width:20px;height:20px;stroke:var(--ink);fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
 html[data-theme="dark"] .ic-sun{display:none}
 html:not([data-theme="dark"]) .ic-moon{display:none}
+
+/* ==================== HERO ==================== */
 .hero{position:relative;padding:78px 0 60px;overflow:hidden}
 .hero-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:52px;align-items:center}
 .eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--terra);font-weight:600;margin-bottom:22px}
@@ -55,6 +57,8 @@ html:not([data-theme="dark"]) .ic-moon{display:none}
 .tag-float{position:absolute;background:var(--cream);border-radius:14px;padding:10px 16px;box-shadow:var(--shadow);font-size:13.5px;font-weight:600;color:var(--green-2);border:1px solid var(--line)}
 .tag-float small{display:block;font-size:11px;font-weight:500;color:var(--ink-soft);letter-spacing:.12em;text-transform:uppercase}
 .t1{top:2%;left:-4%}.t2{bottom:6%;right:-2%}.t3{bottom:34%;left:-11%}
+
+/* ==================== SECTIONS ==================== */
 .sec{padding:92px 0;position:relative}
 .sec-head{display:flex;align-items:flex-end;gap:26px;margin-bottom:46px;flex-wrap:wrap}
 .sec-no{font-family:'Anek Bangla',sans-serif;font-size:clamp(3.2rem,7vw,5.4rem);font-weight:700;color:rgba(194,82,45,.22);line-height:.8;flex:none}
@@ -62,6 +66,7 @@ html:not([data-theme="dark"]) .ic-moon{display:none}
 .sec-head p{color:var(--ink-soft);max-width:62ch;margin-top:10px}
 .rule{height:1px;background:var(--line);flex:1;min-width:60px;margin-bottom:16px}
 .split{display:grid;grid-template-columns:1.05fr .95fr;gap:46px;align-items:start}
+.split>*{min-width:0}
 .prose p{margin-bottom:18px;color:var(--ink-soft)}
 .prose p strong{color:var(--ink)}
 .callout{background:var(--green);color:#EFE6D2;border-radius:22px;padding:32px 30px;position:relative;overflow:hidden}
@@ -69,6 +74,8 @@ html:not([data-theme="dark"]) .ic-moon{display:none}
 .callout h3{color:#FBF5E8;font-size:1.55rem;margin-bottom:12px}
 .callout p{color:rgba(239,230,210,.85);margin-bottom:0}
 .callout .k{display:inline-block;background:rgba(223,162,63,.22);color:var(--amber);padding:3px 12px;border-radius:999px;font-size:13px;margin-bottom:14px;letter-spacing:.08em}
+
+/* ==================== STAGE / CHECKS ==================== */
 .stage{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:44px}
 .stage-card{background:var(--cream);border:1px solid var(--line);border-radius:18px;padding:26px 22px;transition:.35s ease;position:relative;overflow:hidden}
 .stage-card:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:rgba(194,82,45,.4)}
@@ -80,8 +87,19 @@ html:not([data-theme="dark"]) .ic-moon{display:none}
 .check h4{font-size:1.22rem;margin-bottom:8px;display:flex;gap:10px;align-items:center}
 .check h4 i{width:26px;height:26px;border-radius:50%;background:rgba(46,91,64,.13);color:var(--green-2);display:grid;place-items:center;font-style:normal;font-size:14px;flex:none}
 .check p{font-size:15px;color:var(--ink-soft);line-height:1.78}
-.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -2px;border-radius:14px}
-.table-wrap table.sched{min-width:520px}
+
+/* ==================== TABLE ==================== */
+.table-wrap{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;margin:0 -2px;border-radius:14px;max-width:100%;position:relative}
+table{width:100%;border-collapse:collapse;font-size:15px;min-width:420px}
+.table-wrap table.sched{min-width:480px}
+thead th{background:var(--green);color:#FBF5E8;font-family:'Hind Siliguri',sans-serif;font-weight:600;font-size:13px;letter-spacing:.06em;padding:12px;text-align:right}
+thead th:first-child{text-align:left}
+tbody td{padding:11px 12px;border-bottom:1px solid var(--line);text-align:right;color:var(--ink-soft)}
+tbody td:first-child{text-align:left;color:var(--ink);font-weight:500}
+tbody tr:nth-child(even){background:rgba(223,162,63,.08)}
+tbody tr:hover{background:rgba(194,82,45,.1)}
+
+/* ==================== INDEX ==================== */
 .idx{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 .idx a{display:flex;align-items:center;gap:16px;text-decoration:none;color:var(--ink);background:var(--cream);border:1px solid var(--line);border-radius:14px;padding:18px 20px;transition:.3s cubic-bezier(.2,.8,.2,1);min-height:56px}
 .idx a:hover{transform:translateX(8px);border-color:var(--terra);box-shadow:var(--shadow)}
@@ -89,6 +107,8 @@ html:not([data-theme="dark"]) .ic-moon{display:none}
 .idx .t{font-family:'Tiro Bangla',serif;font-size:19px;line-height:1.3}
 .idx .t small{display:block;font-family:'Hind Siliguri',sans-serif;font-size:12.5px;color:var(--ink-soft);letter-spacing:.06em}
 .notice{margin-top:30px;background:rgba(223,162,63,.16);border:1px dashed rgba(194,82,45,.45);border-radius:16px;padding:20px 24px;font-size:15px;color:#6B4A22}
+
+/* ==================== RECIPE ==================== */
 .recipe{background:var(--cream);border:1px solid var(--line);border-radius:26px;padding:42px;margin-bottom:34px;position:relative;overflow:hidden}
 .recipe::before{content:attr(data-n);position:absolute;top:-28px;right:18px;font-family:'Anek Bangla',sans-serif;font-size:clamp(6rem,13vw,10rem);font-weight:700;color:rgba(194,82,45,.09);line-height:1;pointer-events:none}
 .recipe-head{margin-bottom:28px;position:relative;z-index:2}
@@ -98,15 +118,9 @@ html:not([data-theme="dark"]) .ic-moon{display:none}
 .recipe-head h3{font-size:clamp(1.85rem,3.3vw,2.55rem);margin-bottom:12px}
 .recipe-head p{color:var(--ink-soft);max-width:72ch}
 .recipe-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:38px;align-items:start;position:relative;z-index:2}
+.recipe-grid>*{min-width:0}
 .box-title{font-family:'Tiro Bangla',serif;font-size:1.32rem;margin-bottom:16px;display:flex;align-items:center;gap:12px}
 .box-title::after{content:"";height:1px;background:var(--line);flex:1;min-width:20px}
-table{width:100%;border-collapse:collapse;font-size:15px}
-thead th{background:var(--green);color:#FBF5E8;font-family:'Hind Siliguri',sans-serif;font-weight:600;font-size:13px;letter-spacing:.06em;padding:12px;text-align:right}
-thead th:first-child{text-align:left}
-tbody td{padding:11px 12px;border-bottom:1px solid var(--line);text-align:right;color:var(--ink-soft)}
-tbody td:first-child{text-align:left;color:var(--ink);font-weight:500}
-tbody tr:nth-child(even){background:rgba(223,162,63,.08)}
-tbody tr:hover{background:rgba(194,82,45,.1)}
 .nutri{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:10px;margin-top:22px}
 .nut{background:var(--paper);border-radius:13px;padding:14px 12px;text-align:center;border:1px solid var(--line)}
 .nut b{display:block;font-family:'Anek Bangla',sans-serif;font-size:19px;color:var(--terra);line-height:1.25}
@@ -124,6 +138,8 @@ tbody tr:hover{background:rgba(194,82,45,.1)}
 .fact{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:11px 16px;font-size:14px;color:var(--ink-soft)}
 .fact b{color:var(--green-2);font-family:'Anek Bangla',sans-serif}
 .foot-note{margin-top:22px;padding:16px 20px;background:rgba(46,91,64,.08);border-radius:13px;font-size:14.5px;color:var(--green-2)}
+
+/* ==================== SHAGARA ==================== */
 .shagara{background:var(--green);color:#E9E0CC;border-radius:28px;padding:52px 46px;position:relative;overflow:hidden}
 .shagara::before{content:"";position:absolute;width:420px;height:420px;border-radius:50%;background:rgba(223,162,63,.1);top:-190px;right:-140px}
 .shagara h3{color:#FBF5E8;font-size:clamp(1.9rem,3.4vw,2.65rem);margin-bottom:16px}
@@ -135,22 +151,29 @@ tbody tr:hover{background:rgba(194,82,45,.1)}
 .shagara ul li::before{content:"";position:absolute;left:0;top:12px;width:9px;height:9px;border-radius:50%;background:var(--amber)}
 .ratio{display:flex;flex-wrap:wrap;gap:12px;margin:18px 0 4px}
 .ratio span{background:rgba(223,162,63,.16);color:var(--amber);border-radius:999px;padding:8px 18px;font-weight:600;font-size:14.5px}
+
+/* ==================== TABS ==================== */
 .tabs{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:30px}
-.tab-btn{border:1.5px solid var(--line);background:var(--cream);color:var(--ink);border-radius:999px;padding:11px 22px;font-family:'Hind Siliguri',sans-serif;font-size:15.5px;font-weight:600;cursor:pointer;transition:.28s cubic-bezier(.2,.8,.2,1);min-height:46px;display:inline-flex;align-items:center}
+.tab-btn{border:1.5px solid var(--line);background:var(--cream);color:var(--ink);border-radius:999px;padding:11px 22px;font-family:'Hind Siliguri',sans-serif;font-size:15.5px;font-weight:600;cursor:pointer;transition:.28s cubic-bezier(.2,.8,.2,1);min-height:46px;display:inline-flex;align-items:center;flex:0 0 auto}
 .tab-btn:hover{border-color:var(--terra);color:var(--terra);transform:translateY(-2px)}
 .tab-btn.active{background:var(--green);border-color:var(--green);color:#FBF5E8;box-shadow:var(--shadow)}
 .tab-panel{display:none}
 .tab-panel.active{display:block;animation:fadeUp .55s cubic-bezier(.2,.8,.2,1)}
 @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
-.chart-card{background:var(--cream);border:1px solid var(--line);border-radius:26px;padding:40px;position:relative;overflow:hidden}
-.chart-card::before{content:"";position:absolute;width:240px;height:240px;border-radius:50%;background:rgba(223,162,63,.13);top:-120px;right:-90px}
+
+/* ==================== CHART CARD ==================== */
+.chart-card{background:var(--cream);border:1px solid var(--line);border-radius:26px;padding:40px;position:relative;overflow:hidden;overflow-x:clip}
+.chart-card::before{content:"";position:absolute;width:240px;height:240px;border-radius:50%;background:rgba(223,162,63,.13);top:-120px;right:-90px;pointer-events:none}
 .chart-head{margin-bottom:26px;position:relative;z-index:2}
 .chart-head .tagline{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
 .chart-head h3{font-size:clamp(1.8rem,3.2vw,2.45rem);margin-bottom:10px}
 .chart-head p{color:var(--ink-soft);max-width:72ch}
 .chart-grid{display:grid;grid-template-columns:1.35fr .65fr;gap:34px;align-items:start;position:relative;z-index:2}
+.chart-grid>*{min-width:0}
 .sched td:nth-child(2){font-weight:500;color:var(--ink)}
 .sched td:nth-child(3){font-family:'Anek Bangla',sans-serif;color:var(--terra);font-weight:600;white-space:nowrap}
+
+/* ==================== SIDE BOX ==================== */
 .side-box{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:24px;margin-bottom:18px}
 .side-box h4{font-size:1.22rem;margin-bottom:12px;display:flex;align-items:center;gap:10px}
 .side-box h4 i{width:26px;height:26px;border-radius:50%;background:rgba(194,82,45,.15);color:var(--terra);display:grid;place-items:center;font-style:normal;font-size:13px;flex:none;font-family:'Anek Bangla',sans-serif}
@@ -159,6 +182,8 @@ tbody tr:hover{background:rgba(194,82,45,.1)}
 .side-box ul li::before{content:"\2022";position:absolute;left:6px;color:var(--terra);font-weight:700}
 .side-box.avoid ul li::before{content:"\2715";color:var(--terra);left:2px;font-size:12px;top:2px}
 .side-box.ok ul li::before{content:"\2713";color:var(--green-2);left:0;font-size:13px;top:1px}
+
+/* ==================== SUM GRID / PORTION ==================== */
 .sum-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:34px}
 .sum{background:var(--cream);border:1px solid var(--line);border-radius:18px;padding:22px 20px;transition:.32s ease}
 .sum:hover{transform:translateY(-5px);box-shadow:var(--shadow);border-color:rgba(46,91,64,.35)}
@@ -171,13 +196,16 @@ tbody tr:hover{background:rgba(194,82,45,.1)}
 .pcard .icon{width:56px;height:56px;margin:0 auto 12px;border-radius:50%;background:rgba(223,162,63,.18);display:grid;place-items:center;font-family:'Anek Bangla',sans-serif;font-weight:700;color:var(--terra);font-size:20px}
 .pcard h4{font-size:1.15rem;margin-bottom:6px}
 .pcard p{font-size:14px;color:var(--ink-soft);line-height:1.7}
-.track-shell{background:var(--cream);border:1px solid var(--line);border-radius:26px;padding:40px;position:relative;overflow:hidden}
-.track-shell::before{content:"";position:absolute;width:280px;height:280px;border-radius:50%;background:rgba(46,91,64,.1);top:-140px;left:-110px}
+
+/* ==================== TRACKER ==================== */
+.track-shell{background:var(--cream);border:1px solid var(--line);border-radius:26px;padding:40px;position:relative;overflow:hidden;overflow-x:clip}
+.track-shell::before{content:"";position:absolute;width:280px;height:280px;border-radius:50%;background:rgba(46,91,64,.1);top:-140px;left:-110px;pointer-events:none}
 .profile-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;position:relative;z-index:2}
 .field label{display:block;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin-bottom:8px}
 .field input,.field select{width:100%;padding:13px 16px;border:1.5px solid var(--line);border-radius:13px;background:var(--paper);font-family:'Hind Siliguri',sans-serif;font-size:16px;color:var(--ink);transition:.25s;-webkit-appearance:none;appearance:none}
 .field input:focus,.field select:focus{outline:none;border-color:var(--green-2);box-shadow:0 0 0 4px rgba(46,91,64,.13)}
 .track-grid{display:grid;grid-template-columns:1.4fr .6fr;gap:34px;margin-top:32px;align-items:start;position:relative;z-index:2}
+.track-grid>*{min-width:0}
 .track-item{display:grid;grid-template-columns:110px 1fr auto;gap:16px;align-items:center;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:15px 18px;transition:.3s cubic-bezier(.2,.8,.2,1)}
 .track-item+.track-item{margin-top:12px}
 .track-item.done{border-color:rgba(46,91,64,.5);background:rgba(46,91,64,.09)}
@@ -197,8 +225,12 @@ tbody tr:hover{background:rgba(194,82,45,.1)}
 .all-done{color:var(--green-2);font-weight:600;font-size:15px}
 .date-label{font-family:'Hind Siliguri',sans-serif;font-size:13px;letter-spacing:.1em;color:var(--terra);font-weight:700}
 .track-actions{margin-top:28px;display:flex;flex-wrap:wrap;gap:14px}
+
+/* ==================== TOAST ==================== */
 #toast{position:fixed;left:50%;bottom:30px;transform:translate(-50%,20px);background:var(--ink);color:var(--cream);padding:13px 26px;border-radius:999px;font-size:15px;opacity:0;pointer-events:none;transition:.35s cubic-bezier(.2,.8,.2,1);z-index:1400;box-shadow:var(--shadow);max-width:calc(100vw - 40px);text-align:center}
 #toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* ==================== SHARE MODAL ==================== */
 .share-overlay{position:fixed;inset:0;background:rgba(36,26,15,.58);-webkit-backdrop-filter:blur(7px);backdrop-filter:blur(7px);z-index:1350;display:flex;align-items:center;justify-content:center;padding:22px;opacity:0;pointer-events:none;transition:.35s ease}
 .share-overlay.open{opacity:1;pointer-events:auto}
 .share-box{background:var(--cream);border-radius:24px;max-width:520px;width:100%;max-height:92vh;overflow:auto;-webkit-overflow-scrolling:touch;padding:28px;box-shadow:0 40px 90px -30px rgba(0,0,0,.5);transform:translateY(20px) scale(.97);transition:.38s cubic-bezier(.2,.8,.2,1)}
@@ -215,6 +247,8 @@ tbody tr:hover{background:rgba(194,82,45,.1)}
 .btn-fb{background:#1877F2;color:#fff}
 .btn-fb:hover{background:#125FC0;transform:translateY(-3px);letter-spacing:.05em}
 .share-note{margin-top:15px;font-size:13.5px;color:var(--ink-soft);line-height:1.75;background:rgba(223,162,63,.12);border-radius:12px;padding:13px 16px}
+
+/* ==================== TIPS ==================== */
 .tip-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .tip{background:var(--cream);border:1px solid var(--line);border-radius:20px;padding:28px 26px;position:relative;overflow:hidden;transition:.35s ease}
 .tip:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:rgba(46,91,64,.35)}
@@ -222,6 +256,8 @@ tbody tr:hover{background:rgba(194,82,45,.1)}
 .tip h4{font-size:1.32rem;margin-bottom:10px}
 .tip p{font-size:15px;color:var(--ink-soft);line-height:1.8}
 .tip .src{margin-top:14px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--terra);font-weight:600}
+
+/* ==================== WARN / DONT ==================== */
 .warn-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:34px}
 .warn{border-radius:20px;padding:30px 28px}
 .warn.good{background:rgba(46,91,64,.1);border:1px solid rgba(46,91,64,.3)}
@@ -235,7 +271,10 @@ tbody tr:hover{background:rgba(194,82,45,.1)}
 .dont{margin-top:22px;background:rgba(194,82,45,.1);border:1px dashed rgba(194,82,45,.45);border-radius:18px;padding:26px 28px}
 .dont h4{font-family:'Tiro Bangla',serif;font-size:1.32rem;margin-bottom:12px;color:var(--terra)}
 .dont p{font-size:15px;color:var(--ink-soft)}
+
+/* ==================== SOURCE ==================== */
 .source-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:start}
+.source-grid>*{min-width:0}
 .cite{background:var(--cream);border:1px solid var(--line);border-left:5px solid var(--terra);border-radius:18px;padding:30px}
 .cite p{color:var(--ink-soft);font-size:15.5px}
 .cite .en{font-family:'Hind Siliguri',sans-serif;font-style:italic;color:var(--ink);background:var(--paper);padding:14px 18px;border-radius:12px;margin-top:16px;font-size:14.5px;line-height:1.8}
@@ -247,6 +286,8 @@ tbody tr:hover{background:rgba(194,82,45,.1)}
 .src-list{list-style:none;margin-top:12px}
 .src-list li{position:relative;padding:0 0 12px 26px;font-size:14.5px;color:var(--ink-soft);line-height:1.75}
 .src-list li::before{content:"\2192";position:absolute;left:0;color:var(--terra);font-weight:700}
+
+/* ==================== FOOTER ==================== */
 footer{background:var(--green);color:#CDBFA4;padding:56px 0 34px;margin-top:20px}
 .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:36px;padding-bottom:32px;border-bottom:1px solid rgba(239,230,210,.16)}
 footer h4{color:#FBF5E8;font-size:1.35rem;margin-bottom:12px}
@@ -256,8 +297,12 @@ footer ul li{margin-bottom:9px}
 footer a{color:#CDBFA4;text-decoration:none;transition:.25s;display:inline-block;min-height:36px;line-height:36px}
 footer a:hover{color:var(--amber)}
 .copy{padding-top:24px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;color:rgba(205,191,164,.7)}
+
+/* ==================== TO TOP ==================== */
 .to-top{position:fixed;right:22px;bottom:22px;width:52px;height:52px;border-radius:50%;border:none;background:var(--terra);color:#FBF5E8;font-size:22px;cursor:pointer;opacity:0;transform:translateY(16px);transition:.35s ease;box-shadow:var(--shadow);z-index:950;display:flex;align-items:center;justify-content:center}
 .to-top.show{opacity:1;transform:translateY(0)}
+
+/* ==================== REVEAL ==================== */
 .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1);animation:revealSafety 0s 4s forwards}
 @keyframes revealSafety{to{opacity:1;transform:none}}
 .reveal.in{opacity:1;transform:none}
@@ -324,7 +369,6 @@ footer a:hover{color:var(--amber)}
 .rem-status b{color:var(--green-2)}
 
 /* ==================== RECIPE TOOLS ==================== */
-.chart-card::before,.track-shell::before{pointer-events:none}
 .muted{color:var(--ink-soft);font-size:14.5px;line-height:1.75}
 .rtools{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:26px}
 .rtools input,.rtools select{padding:12px 18px;border:1.5px solid var(--line);border-radius:999px;background:var(--cream);font-family:inherit;font-size:15px;color:var(--ink)}
@@ -334,12 +378,18 @@ footer a:hover{color:var(--amber)}
 .rbtns{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
 .rbtns .t-btn{width:auto}
 
-/* ==================== RESPONSIVE ==================== */
+/* ============================================================
+   RESPONSIVE — 1100px
+   ============================================================ */
 @media(max-width:1100px){
   .hero-grid{gap:36px}
   .split,.recipe-grid,.source-grid,.chart-grid,.track-grid{gap:32px}
   .nav-links a{font-size:13px;padding:7px 9px}
 }
+
+/* ============================================================
+   RESPONSIVE — 1040px
+   ============================================================ */
 @media(max-width:1040px){
   .hero-grid,.split,.recipe-grid,.source-grid,.chart-grid,.track-grid{grid-template-columns:1fr}
   .stage,.checks,.tip-grid,.sum-grid{grid-template-columns:repeat(2,1fr)}
@@ -353,9 +403,13 @@ footer a:hover{color:var(--amber)}
   .chart-card,.track-shell,.recipe,.ms-shell{padding:32px 28px}
   .foot-grid{grid-template-columns:1.2fr 1fr 1fr;gap:28px}
 }
+
+/* ============================================================
+   RESPONSIVE — 860px
+   ============================================================ */
 @media(max-width:860px){
   .nav{height:68px}
-  .brand-mark{width:34px;height:34px}
+  .brand-mark{width:36px;height:36px}
   .brand b{font-size:15.5px}
   .brand span{display:none}
   .nav-links a{font-size:13px;padding:7px 8px}
@@ -393,13 +447,18 @@ footer a:hover{color:var(--amber)}
   .portion{gap:12px}
   .portion .pcard{padding:18px 14px}
 }
+
+/* ============================================================
+   RESPONSIVE — 760px (MOBILE PRIMARY FIX ZONE)
+   ============================================================ */
 @media(max-width:760px){
   html{scroll-padding-top:80px}
   body{font-size:16px}
   .wrap{padding:0 18px}
+
+  /* --- NAV --- */
   .nav{height:64px;gap:12px}
-  .brand-mark{width:30px;height:30px}
-  .brand-mark::after{inset:7px}
+  .brand-mark{width:32px;height:32px}
   .brand b{font-size:14.5px}
   .menu-btn{display:flex}
   .nav-links{
@@ -417,6 +476,8 @@ footer a:hover{color:var(--amber)}
   .nav-links.open{transform:translateY(0);visibility:visible}
   .nav-links a{padding:14px 16px;font-size:16px;min-height:48px;border-radius:12px}
   .nav-links a.active{border-radius:12px}
+
+  /* --- HERO --- */
   .hero{padding:44px 0 36px}
   .hero-grid{gap:28px}
   .hero h1{font-size:clamp(1.95rem,7.5vw,2.85rem)}
@@ -430,20 +491,28 @@ footer a:hover{color:var(--amber)}
   .chip{font-size:13px;padding:7px 13px}
   .plate{width:min(100%,280px)}
   .t1,.t2,.t3{display:none}
+
+  /* --- SECTIONS --- */
   .sec{padding:52px 0}
   .sec-head{gap:14px;margin-bottom:30px;flex-direction:row;align-items:flex-end}
   .sec-no{font-size:clamp(2.2rem,10vw,3.2rem)}
   .sec-head h2{font-size:clamp(1.55rem,5.5vw,2.15rem)}
   .sec-head p{font-size:14.5px;line-height:1.7}
   .rule{display:none}
+
+  /* --- GRIDS → 1 column --- */
   .stage,.checks,.tip-grid,.warn-row,.sum-grid,.portion,.profile-row,.idx{grid-template-columns:1fr}
   .stage-card,.check,.sum,.tip{padding:20px 18px}
+
+  /* --- CALLOUT / SHAGARA --- */
   .callout{padding:22px 20px;border-radius:18px}
   .callout h3{font-size:1.25rem}
   .shagara{padding:28px 20px;border-radius:20px}
   .shagara h3{font-size:clamp(1.5rem,5vw,2rem)}
   .shagara .box{padding:20px 18px}
   .ratio span{font-size:13px;padding:7px 14px}
+
+  /* --- RECIPE --- */
   .recipe{padding:24px 18px;border-radius:20px;margin-bottom:22px}
   .recipe::before{font-size:5rem;top:-18px;right:12px}
   .recipe-head{margin-bottom:20px}
@@ -452,31 +521,58 @@ footer a:hover{color:var(--amber)}
   .recipe-grid{gap:24px}
   .box-title{font-size:1.2rem;margin-bottom:12px}
   .tagline span{font-size:11.5px;padding:4px 11px}
+
+  /* --- TABLE (KEY FIX) --- */
   .table-wrap{margin:0 -6px;border-radius:12px}
-  .table-wrap table{font-size:14px}
-  .table-wrap table.sched{min-width:460px}
-  thead th{padding:10px 8px;font-size:12px}
-  tbody td{padding:9px 8px;font-size:13.5px}
+  .table-wrap table{font-size:13px;min-width:380px}
+  .table-wrap table.sched{min-width:400px}
+  thead th{padding:9px 7px;font-size:11px;letter-spacing:.03em}
+  tbody td{padding:8px 7px;font-size:12.5px;line-height:1.55}
+  tbody td:first-child{font-weight:600}
+  .sched td:nth-child(2){font-size:14px}
+  .sched td:nth-child(3){font-size:12px}
+
+  /* --- STICKY FIRST COLUMN ON MOBILE --- */
+  .sched th:first-child,
+  .sched td:first-child{
+    position:sticky;left:0;z-index:2;
+    background:var(--cream);
+    box-shadow:2px 0 6px rgba(36,26,15,.08);
+    min-width:88px;
+  }
+  .sched th:first-child{background:var(--green)}
+  .sched tr:nth-child(even) td:first-child{background:var(--paper-2)}
+
+  /* --- NUTRI / FACTS --- */
   .nutri{grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:8px}
   .nut{padding:12px 8px}
   .nut b{font-size:17px}
   .facts{gap:8px}
   .fact{padding:9px 13px;font-size:13px}
+
+  /* --- STEPS / BENEFITS --- */
   .steps li{padding-left:52px;padding-bottom:18px}
   .steps li::before{width:36px;height:36px;font-size:13px}
   .steps li::after{left:17px;top:38px}
   .benefits li{padding:10px 12px 10px 36px;font-size:14px}
+
+  /* --- CHART CARD --- */
   .chart-card{padding:22px 18px;border-radius:20px}
   .chart-head h3{font-size:clamp(1.45rem,5vw,2rem)}
   .chart-head p{font-size:14.5px}
   .chart-grid{gap:22px}
-  .sched td:nth-child(2){font-size:14px}
-  .sched td:nth-child(3){font-size:13px}
-  .tabs{gap:8px;margin-bottom:22px}
-  .tab-btn{padding:10px 18px;font-size:14.5px;min-height:44px}
+
+  /* --- TABS (KEY FIX) --- */
+  .tabs{gap:6px;margin-bottom:22px;display:flex;flex-wrap:wrap}
+  .tab-btn{padding:8px 14px;font-size:13px;min-height:42px;border-radius:12px;flex:0 0 auto}
+  .tab-btn.active{box-shadow:0 4px 16px rgba(36,26,15,.18)}
+
+  /* --- SIDE BOX --- */
   .side-box{padding:18px;border-radius:14px}
   .side-box h4{font-size:1.12rem}
   .side-box ul li{font-size:13.5px;padding-left:22px}
+
+  /* --- TRACKER --- */
   .track-shell{padding:22px 18px;border-radius:20px}
   .track-grid{gap:22px}
   .track-item{grid-template-columns:1fr;gap:10px;padding:14px 16px}
@@ -492,36 +588,58 @@ footer a:hover{color:var(--amber)}
   .ring-pct{width:130px;height:130px}
   .ring-pct .inner{width:100px;height:100px;font-size:26px}
   .date-label{font-size:12px}
+
+  /* --- SHARE MODAL --- */
   .share-overlay{padding:12px;align-items:flex-end}
   .share-box{max-height:88vh;border-radius:20px 20px 14px 14px;padding:22px 18px;transform:translateY(40px)}
   .share-head h4{font-size:1.35rem}
   .share-close{width:42px;height:42px}
   .share-actions .btn{min-height:48px;font-size:15px}
   .share-note{font-size:12.5px;padding:11px 14px}
+
+  /* --- TIPS --- */
   .tip .ic{width:42px;height:42px;font-size:18px;margin-bottom:12px}
   .tip h4{font-size:1.18rem}
   .tip p{font-size:14px;line-height:1.75}
+
+  /* --- SOURCE --- */
   .source-grid{gap:22px}
   .cite{padding:22px 18px;border-radius:16px}
   .cite p{font-size:14.5px}
   .cite .en{font-size:13px;padding:12px 14px}
   .contact{padding:22px 18px;border-radius:16px}
+
+  /* --- FOOTER --- */
   footer{padding:40px 0 28px}
   .foot-grid{grid-template-columns:1fr;gap:22px;padding-bottom:24px}
   .copy{flex-direction:column;gap:8px;font-size:12px;text-align:center}
+
+  /* --- TO TOP / TOAST --- */
   .to-top{width:46px;height:46px;font-size:19px;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px))}
   #toast{bottom:calc(20px + env(safe-area-inset-bottom,0px));font-size:14px;padding:11px 22px}
+
+  /* --- MISC --- */
   .foot-note{padding:13px 16px;font-size:13.5px;margin-top:18px}
   .notice{padding:16px 18px;font-size:14px;margin-top:22px}
+
+  /* --- MILESTONES --- */
   .ms-shell{padding:22px 18px;border-radius:20px}
   .ms-item{padding:13px 14px}
   .ms-text strong{font-size:1.05rem}
   .ms-text small{font-size:12.5px}
+
+  /* --- REMINDERS --- */
   .rem-shell{padding:18px 16px;margin-top:26px}
   .rem-item{grid-template-columns:1fr;padding:14px}
 }
+
+/* ============================================================
+   RESPONSIVE — 480px
+   ============================================================ */
 @media(max-width:480px){
   .wrap{padding:0 14px}
+
+  /* --- HERO --- */
   .hero h1{font-size:clamp(1.75rem,8.5vw,2.45rem)}
   .hero .sub{font-size:1.05rem}
   .eyebrow{font-size:10px;letter-spacing:.16em}
@@ -529,34 +647,60 @@ footer a:hover{color:var(--amber)}
   .meta-strip{flex-direction:column;gap:6px}
   .chip{font-size:12.5px;padding:6px 12px}
   .plate{width:min(100%,220px)}
+
+  /* --- SECTIONS --- */
   .sec{padding:42px 0}
   .sec-no{font-size:2.2rem}
   .sec-head{flex-direction:column;align-items:flex-start;gap:8px;margin-bottom:24px}
   .sec-head h2{font-size:1.55rem}
   .sec-head p{font-size:14px}
+
+  /* --- RECIPE --- */
   .recipe{padding:20px 14px}
   .recipe-head h3{font-size:1.55rem}
+
+  /* --- CHART / TRACK --- */
   .chart-card{padding:18px 14px}
   .track-shell{padding:18px 14px}
   .track-item{padding:12px 14px}
+
+  /* --- CALLOUT / SHAGARA --- */
   .callout{padding:18px 16px}
   .shagara{padding:22px 16px}
   .shagara .box{padding:16px 14px}
+
+  /* --- SHARE --- */
   .share-box{padding:18px 14px}
+
+  /* --- BUTTONS --- */
   .btn{padding:12px 20px;font-size:14.5px;min-height:44px}
   .tab-btn{padding:9px 15px;font-size:13.5px}
+
+  /* --- TIPS / WARN --- */
   .tip{padding:18px 16px}
   .warn{padding:18px 16px}
+
+  /* --- SOURCE / FOOTER --- */
   .cite,.contact{padding:18px 14px}
   .foot-note{padding:11px 14px;font-size:13px}
+
+  /* --- TABLE (TINY SCREEN) --- */
   .nutri{grid-template-columns:repeat(2,1fr)}
-  .table-wrap table{font-size:13px}
-  .table-wrap table.sched{min-width:420px}
+  .table-wrap table{font-size:12px;min-width:320px}
+  .table-wrap table.sched{min-width:340px}
+  thead th{padding:8px 6px;font-size:10.5px}
+  tbody td{padding:7px 6px;font-size:11.5px;line-height:1.5}
+  .sched td:nth-child(2){font-size:12px}
+  .sched td:nth-child(3){font-size:11px}
+
+  /* --- MILESTONES --- */
   .ms-shell{padding:18px 14px}
   .ms-ghead h4{font-size:1.15rem}
 }
 
-/* ==================== PRINT ==================== */
+/* ============================================================
+   PRINT
+   ============================================================ */
 @media print{
   header,#progress,.to-top,.hero,.tabs,.track-actions,.share-overlay,#toast,.rtools,.rbtns,footer,.menu-btn,#printRow,.rem-shell{display:none!important}
   body::before{display:none}
