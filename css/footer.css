@@ -1,0 +1,147 @@
+/* ============================================================
+   footer.css — গোলাপি · ল্যাভেন্ডার · পিচ থিম, ঢেউ, ভাসমান হার্ট ও অ্যানিমেশন
+   ============================================================ */
+footer{
+  --f-1:#FFDCE8;--f-2:#F9D3EE;--f-3:#DCCBF8;
+  --f-ink:#4B2145;--f-soft:#7C4A73;--f-rose:#E4588C;--f-violet:#8E4DD6;
+  --f-panel:rgba(255,255,255,.5);--f-panel-brd:rgba(255,255,255,.8);
+  --f-wave:#FFDCE8;--f-wave-2:#E9D5FA;
+  position:relative;isolation:isolate;margin-top:64px;padding:54px 0 36px;color:var(--f-ink);
+  background:linear-gradient(180deg,var(--f-1) 0%,var(--f-2) 55%,var(--f-3) 100%);
+}
+:root[data-theme="dark"] footer{
+  --f-1:#2E1633;--f-2:#241632;--f-3:#1A1530;
+  --f-ink:#F7E2F1;--f-soft:#D8B4D2;--f-rose:#FF8FB8;--f-violet:#B79CFF;
+  --f-panel:rgba(255,255,255,.07);--f-panel-brd:rgba(255,255,255,.16);
+  --f-wave:#2E1633;--f-wave-2:#3A1D44;
+}
+
+/* ---------- ঢেউ ---------- */
+.ft-waves{position:absolute;left:0;right:0;top:-43px;height:44px;overflow:hidden;pointer-events:none;z-index:0}
+.ft-wave{position:absolute;left:0;bottom:-1px;width:200%;height:100%;display:block;color:var(--f-wave)}
+.ft-wave.back{color:var(--f-wave-2);opacity:.85;height:88%;bottom:3px;animation:ftWave 16s linear infinite reverse}
+.ft-wave.front{animation:ftWave 10s linear infinite}
+@keyframes ftWave{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ---------- ডেকোরেশন: আলো ও ভাসমান হার্ট ---------- */
+.ft-deco{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.ft-deco::before{
+  content:"";position:absolute;inset:-20%;
+  background:
+    radial-gradient(34% 30% at 14% 20%,rgba(255,170,205,.7),transparent 70%),
+    radial-gradient(32% 28% at 88% 14%,rgba(190,160,255,.6),transparent 70%),
+    radial-gradient(34% 30% at 72% 88%,rgba(255,200,170,.6),transparent 70%),
+    radial-gradient(30% 26% at 10% 90%,rgba(170,210,255,.5),transparent 70%);
+  animation:ftBlob 18s ease-in-out infinite alternate;will-change:transform}
+:root[data-theme="dark"] .ft-deco::before{
+  background:
+    radial-gradient(34% 30% at 14% 20%,rgba(255,110,170,.28),transparent 70%),
+    radial-gradient(32% 28% at 88% 14%,rgba(150,110,255,.30),transparent 70%),
+    radial-gradient(34% 30% at 72% 88%,rgba(255,150,110,.18),transparent 70%),
+    radial-gradient(30% 26% at 10% 90%,rgba(90,150,255,.2),transparent 70%)}
+@keyframes ftBlob{0%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(4%,-3%,0) scale(1.1)}100%{transform:translate3d(-4%,3%,0) scale(1.05)}}
+
+.ft-float{position:absolute;bottom:-24px;left:var(--x);font-size:var(--s);line-height:1;color:var(--f-rose);opacity:0;
+  animation:ftRise var(--d) ease-in infinite;animation-delay:var(--dl);animation-play-state:paused;will-change:transform,opacity;
+  text-shadow:0 0 12px rgba(255,255,255,.7)}
+.ft-float:nth-child(3n){color:var(--f-violet)}
+.ft-float:nth-child(4n){color:#FFB38A}
+.ft-float:nth-child(5n){color:#7FB6FF}
+footer.ft-live .ft-float{animation-play-state:running}
+@keyframes ftRise{
+  0%{transform:translate3d(0,0,0) scale(.5) rotate(0);opacity:0}
+  12%{opacity:.85}
+  60%{opacity:.6}
+  100%{transform:translate3d(var(--dx,24px),-420px,0) scale(1.15) rotate(28deg);opacity:0}}
+
+/* ---------- কনটেন্ট ---------- */
+footer .wrap{position:relative;z-index:1}
+.foot-grid{grid-template-columns:1.4fr 1fr 1fr;gap:20px;padding-bottom:26px;border-bottom:0}
+.foot-grid>div{
+  position:relative;overflow:hidden;padding:26px 24px;border-radius:28px;
+  background:radial-gradient(130% 90% at 8% 0%,rgba(255,255,255,.65),transparent 55%),var(--f-panel);
+  border:1px solid var(--f-panel-brd);
+  box-shadow:0 18px 40px -22px rgba(150,60,120,.5),inset 0 1px 0 rgba(255,255,255,.9);
+  -webkit-backdrop-filter:blur(14px) saturate(160%);backdrop-filter:blur(14px) saturate(160%);
+  opacity:0;transform:translateY(34px) scale(.95);filter:blur(8px)}
+:root[data-theme="dark"] .foot-grid>div{box-shadow:0 18px 40px -22px rgba(0,0,0,.8),inset 0 1px 0 rgba(255,255,255,.14);
+  background:radial-gradient(130% 90% at 8% 0%,rgba(255,255,255,.1),transparent 55%),var(--f-panel)}
+footer.ft-in .foot-grid>div{opacity:1;transform:none;filter:none;
+  transition:opacity .7s var(--smooth,ease),transform .95s var(--spring,ease),filter .7s ease;transition-delay:calc(var(--k,0)*.14s)}
+.foot-grid>div:nth-child(1){--k:0}.foot-grid>div:nth-child(2){--k:1}.foot-grid>div:nth-child(3){--k:2}
+/* পর্যায়ক্রমে আলোর ঝলক */
+.foot-grid>div::after{content:"";position:absolute;top:-20%;bottom:-20%;left:-60%;width:40%;pointer-events:none;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-18deg) translateX(0);opacity:0}
+footer.ft-live .foot-grid>div::after{animation:ftShine 7s ease-in-out infinite;animation-delay:calc(var(--k,0)*1.6s + 1.2s)}
+@keyframes ftShine{0%,70%{transform:skewX(-18deg) translateX(0);opacity:0}78%{opacity:1}100%{transform:skewX(-18deg) translateX(520%);opacity:0}}
+
+footer h4{
+  font-size:1.3rem;margin-bottom:12px;line-height:1.35;
+  background:linear-gradient(90deg,#A80F50,#6A2CB8,#C2185B,#A80F50);background-size:300% 100%;
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:#A80F50;font-weight:700;
+  animation:ftShimmer 7s linear infinite}
+:root[data-theme="dark"] footer h4{background-image:linear-gradient(90deg,#FFB3D1,#C7B0FF,#FFC2A0,#FFB3D1)}
+@keyframes ftShimmer{from{background-position:0 0}to{background-position:300% 0}}
+.foot-grid>div:first-child h4::before{content:"♥";display:inline-block;margin-right:8px;font-size:.95em;
+  -webkit-text-fill-color:var(--f-rose);color:var(--f-rose);animation:ftBeat 1.5s ease-in-out infinite;transform-origin:center}
+@keyframes ftBeat{0%,100%{transform:scale(1)}14%{transform:scale(1.35)}28%{transform:scale(1)}42%{transform:scale(1.22)}70%{transform:scale(1)}}
+footer p{font-size:14.5px;line-height:1.85;color:var(--f-soft)}
+footer ul{list-style:none}
+footer ul li{margin-bottom:6px}
+footer a{color:var(--f-ink);display:inline-flex;align-items:center;min-height:38px;line-height:1.4;text-decoration:none;
+  transition:transform .45s var(--spring,ease),color .25s ease,background .25s ease,box-shadow .3s ease}
+footer a::before{content:"♥";font-size:.7em;color:var(--f-rose);margin-right:0;width:0;overflow:hidden;opacity:0;transform:scale(.3);
+  transition:width .35s var(--spring,ease),margin .35s var(--spring,ease),opacity .25s ease,transform .45s var(--spring,ease)}
+footer a:hover{color:var(--f-rose)}
+footer a:hover::before{width:.8em;margin-right:8px;opacity:1;transform:scale(1)}
+footer a:active{transform:scale(.94)}
+footer a:focus-visible{outline:2px solid var(--f-rose);outline-offset:3px;border-radius:10px}
+
+.copy{
+  margin-top:6px;padding:14px 20px;border-radius:999px;justify-content:center;text-align:center;gap:6px 18px;
+  font-size:13px;color:var(--f-soft);
+  background:var(--f-panel);border:1px solid var(--f-panel-brd);box-shadow:inset 0 1px 0 rgba(255,255,255,.8);
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+  opacity:0;transform:translateY(20px);transition:opacity .8s ease .5s,transform .9s var(--spring,ease) .5s}
+footer.ft-in .copy{opacity:1;transform:none}
+:root[data-theme="dark"] .copy{box-shadow:inset 0 1px 0 rgba(255,255,255,.12)}
+
+/* ট্যাপে হার্টের ঝলক */
+.ft-burst{position:fixed;z-index:3500;pointer-events:none;font-size:15px;line-height:1;color:var(--ft-c,#E4588C);
+  animation:ftBurst .9s cubic-bezier(.2,.8,.3,1) forwards}
+@keyframes ftBurst{
+  0%{transform:translate(-50%,-50%) scale(.4);opacity:1}
+  100%{transform:translate(calc(-50% + var(--bx)),calc(-50% + var(--by))) scale(1.2) rotate(30deg);opacity:0}}
+
+/* ---------- ট্যাবলেট ---------- */
+@media (max-width:900px){
+  footer{padding:46px 0 32px}
+  .foot-grid{grid-template-columns:1fr 1fr;gap:16px}
+  .foot-grid>div:first-child{grid-column:1/-1}
+}
+
+/* ---------- মোবাইল ---------- */
+@media (max-width:600px){
+  footer{margin-top:56px;padding:40px 0 26px}
+  .ft-waves{top:-35px;height:36px}
+  .foot-grid{grid-template-columns:1fr;gap:12px;padding-bottom:16px}
+  .foot-grid>div{padding:20px 18px;border-radius:26px}
+  footer h4{font-size:1.18rem;margin-bottom:10px}
+  footer p{font-size:14px;line-height:1.8}
+  /* লিংক → গোল চিপ */
+  footer ul{display:flex;flex-wrap:wrap;gap:8px}
+  footer ul li{margin:0}
+  footer ul a{min-height:42px;padding:0 15px;font-size:14px;border-radius:999px;
+    background:rgba(255,255,255,.62);border:1px solid rgba(255,255,255,.85);
+    box-shadow:0 6px 14px -10px rgba(150,60,120,.6),inset 0 1px 0 #fff}
+  :root[data-theme="dark"] footer ul a{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.16);box-shadow:inset 0 1px 0 rgba(255,255,255,.14)}
+  footer ul a::before{display:none}
+  footer ul a:active{background:linear-gradient(135deg,#FFB3D1,#D9C2FF);color:#4B2145}
+  .copy{flex-direction:column;align-items:center;border-radius:24px;padding:14px 16px;font-size:12.5px;line-height:1.65}
+  .ft-float:nth-child(n+9){display:none}
+}
+@media (max-width:360px){
+  .foot-grid>div{padding:18px 14px}
+  footer ul a{padding:0 12px;font-size:13.5px}
+}
+@media print{footer *,.ft-waves,.ft-deco{display:none!important}}

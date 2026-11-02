@@ -1,0 +1,239 @@
+/* ============================================================
+   glass.css — iOS "Liquid Glass" স্টাইল + অ্যানিমেশন
+   (স্বচ্ছ কাচের কার্ড, ভাসমান ট্যাব বার, স্প্রিং অ্যানিমেশন, অ্যাম্বিয়েন্ট ব্যাকগ্রাউন্ড)
+   style.css ও app.css-এর পরে লোড হয়।
+   ============================================================ */
+:root{
+  --spring:cubic-bezier(.34,1.56,.64,1);
+  --smooth:cubic-bezier(.2,.8,.2,1);
+  --g-bg:rgba(255,252,244,.62);
+  --g-bar:rgba(255,252,244,.55);
+  --g-sheen:rgba(255,255,255,.6);
+  --g-brd:rgba(255,255,255,.72);
+  --g-shadow:0 12px 30px -16px rgba(30,59,42,.38);
+  --g-spec:inset 0 1px 0 rgba(255,255,255,.95),inset 0 -1px 0 rgba(30,59,42,.06);
+  --g-input:rgba(255,255,255,.55);
+}
+:root[data-theme="dark"]{
+  --g-bg:rgba(34,45,33,.58);
+  --g-bar:rgba(22,28,21,.55);
+  --g-sheen:rgba(255,255,255,.10);
+  --g-brd:rgba(255,255,255,.14);
+  --g-shadow:0 14px 34px -16px rgba(0,0,0,.85);
+  --g-spec:inset 0 1px 0 rgba(255,255,255,.16),inset 0 -1px 0 rgba(0,0,0,.35);
+  --g-input:rgba(255,255,255,.07);
+}
+
+/* ---------- অ্যাম্বিয়েন্ট ব্যাকগ্রাউন্ড (কাচের পেছনের রঙ) ---------- */
+body::before{
+  content:"";position:fixed;inset:-14%;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(38% 30% at 12% 8%,rgba(134,199,158,.50),transparent 70%),
+    radial-gradient(34% 28% at 92% 24%,rgba(223,162,63,.34),transparent 70%),
+    radial-gradient(40% 32% at 72% 90%,rgba(232,130,91,.24),transparent 70%),
+    radial-gradient(36% 30% at 6% 78%,rgba(46,91,64,.22),transparent 70%);
+  animation:ambient 28s ease-in-out infinite alternate;will-change:transform;
+}
+:root[data-theme="dark"] body::before{
+  background:
+    radial-gradient(38% 30% at 12% 8%,rgba(134,199,158,.22),transparent 70%),
+    radial-gradient(34% 28% at 92% 24%,rgba(223,162,63,.13),transparent 70%),
+    radial-gradient(40% 32% at 72% 90%,rgba(232,130,91,.12),transparent 70%),
+    radial-gradient(36% 30% at 6% 78%,rgba(44,83,64,.30),transparent 70%);
+}
+@keyframes ambient{
+  0%{transform:translate3d(0,0,0) scale(1)}
+  50%{transform:translate3d(-3%,2.5%,0) scale(1.08) rotate(2deg)}
+  100%{transform:translate3d(3%,-2%,0) scale(1.04) rotate(-2deg)}
+}
+
+/* ---------- কাচের সারফেস (কার্ড) ---------- */
+.chart-card,.track-shell,.recipe,.ms-shell,.rem-shell,.stage-card,.check,.sum,.tip,.pcard,
+.track-item,.rem-item,.idx a,.ms-item,.nutri>*,.share-box,.tab-btn,.t-btn,.btn-ghost{
+  background:radial-gradient(130% 90% at 8% 0%,var(--g-sheen),transparent 55%),var(--g-bg);
+  border:1px solid var(--g-brd);
+  box-shadow:var(--g-shadow),var(--g-spec);
+}
+.check{border-left:4px solid var(--green-2)}
+.rem-item,.track-item,.ms-item,.idx a,.nutri>*{box-shadow:0 8px 20px -14px rgba(30,59,42,.35),var(--g-spec)}
+
+/* খাওয়া/সম্পন্ন অবস্থা: সবুজ কাচ */
+.track-item.done,.ms-item.done,.t-btn.on,.tab-btn.active{
+  background:linear-gradient(180deg,rgba(255,255,255,.28),rgba(255,255,255,0) 55%),var(--green);
+  border-color:rgba(255,255,255,.25);color:#FBF5E8;
+  box-shadow:0 10px 22px -10px rgba(30,59,42,.65),inset 0 1px 0 rgba(255,255,255,.38);
+}
+.track-item.done .ti-time,.track-item.done .ti-food,.track-item.done small,
+.ms-item.done .ms-text strong,.ms-item.done .ms-text small{color:#FBF5E8}
+.track-item.done,.ms-item.done{background:radial-gradient(130% 90% at 8% 0%,rgba(255,255,255,.35),transparent 55%),rgba(46,91,64,.82)}
+.track-item.done .t-btn{background:rgba(255,255,255,.2);color:#fff}
+
+/* রঙিন কাচ: যা করবেন / এড়িয়ে চলবেন / সতর্কতা */
+.warn,.dont,.notice,.foot-note,.ms-note{
+  border:1px solid var(--g-brd);box-shadow:var(--g-shadow),var(--g-spec);
+}
+.warn.good{background:radial-gradient(130% 90% at 8% 0%,var(--g-sheen),transparent 55%),rgba(134,199,158,.26)}
+.warn.bad{background:radial-gradient(130% 90% at 8% 0%,var(--g-sheen),transparent 55%),rgba(232,130,91,.22)}
+.dont,.ms-note{background:radial-gradient(130% 90% at 8% 0%,var(--g-sheen),transparent 55%),rgba(232,130,91,.2)}
+.notice{background:radial-gradient(130% 90% at 8% 0%,var(--g-sheen),transparent 55%),rgba(223,162,63,.24)}
+.foot-note{background:radial-gradient(130% 90% at 8% 0%,var(--g-sheen),transparent 55%),rgba(134,199,158,.2)}
+
+/* ইনপুট */
+.field input,.field select,.rtools input,.rtools select,.rem-item input{
+  background:var(--g-input);border-color:var(--g-brd);box-shadow:inset 0 1px 2px rgba(30,59,42,.08),inset 0 1px 0 rgba(255,255,255,.5);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+
+/* ---------- হেডার ---------- */
+header,:root[data-theme="dark"] header{
+  background:var(--g-bar);
+  -webkit-backdrop-filter:blur(22px) saturate(180%);backdrop-filter:blur(22px) saturate(180%);
+  border-bottom:1px solid var(--g-brd);box-shadow:inset 0 -1px 0 rgba(30,59,42,.05);transition:box-shadow .35s ease}
+header.scrolled{box-shadow:0 12px 30px -20px rgba(20,40,28,.55),inset 0 -1px 0 rgba(30,59,42,.05)}
+.theme-btn{background:var(--g-bg);border:1px solid var(--g-brd);box-shadow:var(--g-spec)}
+
+/* ---------- বোতাম ও স্প্রিং প্রেস ---------- */
+.btn-primary,.btn-wa,.btn-fb{
+  background-image:linear-gradient(180deg,rgba(255,255,255,.28),rgba(255,255,255,0) 55%);
+  box-shadow:0 12px 24px -12px rgba(30,59,42,.65),inset 0 1px 0 rgba(255,255,255,.38)}
+.btn,.t-btn,.tab-btn,.idx a,.ms-item,.tip,.pcard,.app-tab,.sheet-grid a,.sheet-row{
+  transition:transform .45s var(--spring),box-shadow .35s ease,background .3s ease,border-color .3s ease,color .25s ease}
+.btn:active,.t-btn:active,.tab-btn:active,.idx a:active,.ms-item:active,.pcard:active,.tip:active{transform:scale(.965)}
+.idx a:hover,.ms-item:hover{transform:translateX(0)}
+.idx a:active{transform:scale(.97)}
+
+/* ---------- রিভিল অ্যানিমেশন: ব্লার + স্প্রিং ---------- */
+.tip.reveal,.stage-card.reveal,.sum.reveal,.warn.reveal,.dont.reveal,.check.reveal,.pcard.reveal{
+  opacity:0;transform:translateY(26px) scale(.95);filter:blur(8px)}
+.tip.reveal.in,.stage-card.reveal.in,.sum.reveal.in,.warn.reveal.in,.dont.reveal.in,.check.reveal.in,.pcard.reveal.in{
+  opacity:1;transform:none;filter:none;
+  transition:opacity .6s var(--smooth),transform .85s var(--spring),filter .6s var(--smooth),box-shadow .35s ease}
+.tip .ic{background:linear-gradient(145deg,rgba(255,255,255,.85),rgba(134,199,158,.4));
+  box-shadow:inset 0 1px 0 #fff,0 8px 16px -8px rgba(46,91,64,.55)}
+.tip.in .ic{animation:icPop .8s var(--spring) .2s both}
+.tip .src{display:inline-block;padding:3px 11px;border-radius:999px;background:rgba(194,82,45,.1);
+  border:1px solid rgba(255,255,255,.5);letter-spacing:.06em}
+@keyframes icPop{0%{transform:scale(.4) rotate(-12deg);opacity:0}100%{transform:none;opacity:1}}
+.pcard .icon{background:linear-gradient(145deg,rgba(255,255,255,.85),rgba(223,162,63,.35));box-shadow:inset 0 1px 0 #fff,0 8px 16px -8px rgba(194,82,45,.5)}
+
+/* ---------- ভাসমান কাচের ট্যাব বার ---------- */
+@media (max-width:760px){
+  :root{--tab-clear:calc(var(--tab-h) + var(--sab) + 26px)}
+  body{padding-bottom:var(--tab-clear)}
+  .app-tabs,:root[data-theme="dark"] .app-tabs{
+    left:14px;right:14px;bottom:calc(10px + var(--sab));height:var(--tab-h);padding:0 6px;border-radius:34px;
+    background:var(--g-bar);border:1px solid var(--g-brd);
+    -webkit-backdrop-filter:blur(26px) saturate(200%);backdrop-filter:blur(26px) saturate(200%);
+    box-shadow:0 20px 44px -16px rgba(20,40,28,.5),var(--g-spec);
+    animation:tabsIn .8s var(--spring) .1s both}
+  .app-tabs::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+    background:linear-gradient(180deg,rgba(255,255,255,.35),transparent 42%);opacity:.7}
+  .tab-lens{position:absolute;z-index:0;top:6px;bottom:6px;left:6px;width:calc((100% - 12px)/5);border-radius:28px;pointer-events:none;
+    background:radial-gradient(120% 120% at 30% 0%,rgba(255,255,255,.95),rgba(255,255,255,.45));
+    box-shadow:0 6px 16px -8px rgba(30,59,42,.45),inset 0 1px 0 #fff,inset 0 -1px 0 rgba(30,59,42,.08);
+    transform:translateX(calc(var(--i,0)*100%));transition:transform .6s var(--spring)}
+  :root[data-theme="dark"] .tab-lens{background:radial-gradient(120% 120% at 30% 0%,rgba(255,255,255,.28),rgba(255,255,255,.1));
+    box-shadow:0 6px 16px -8px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.3)}
+  .app-tab{z-index:1}
+  .app-tab.on::before{display:none}
+  .app-tab.on{color:var(--green,#1E3B2A)}
+  :root[data-theme="dark"] .app-tab.on{color:#BFF0CF}
+  .app-tab.on svg{animation:tabBounce .6s var(--spring)}
+  .to-top{bottom:calc(var(--tab-clear) + 6px);background:rgba(194,82,45,.82);
+    -webkit-backdrop-filter:blur(14px) saturate(160%);backdrop-filter:blur(14px) saturate(160%);
+    border:1px solid rgba(255,255,255,.4);box-shadow:0 12px 26px -10px rgba(194,82,45,.7),inset 0 1px 0 rgba(255,255,255,.5)}
+  #toast{bottom:calc(var(--tab-clear) + 6px)}
+  .app-install,.app-snack{bottom:calc(var(--tab-clear) + 4px)}
+}
+@keyframes tabsIn{from{transform:translateY(90px) scale(.9);opacity:0}to{transform:none;opacity:1}}
+@keyframes tabBounce{0%{transform:scale(.7)}60%{transform:translateY(-3px) scale(1.18)}100%{transform:translateY(-2px) scale(1.1)}}
+
+/* ---------- "আরও" শিট: ভাসমান কাচ ---------- */
+@media (max-width:760px){
+  .app-sheet-bg{background:rgba(20,30,22,.28);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);transition:opacity .4s ease,visibility .4s}
+  .app-sheet,:root[data-theme="dark"] .app-sheet{
+    left:10px;right:10px;bottom:calc(10px + var(--sab));border-radius:32px;padding-bottom:18px;
+    background:radial-gradient(130% 70% at 10% 0%,var(--g-sheen),transparent 55%),var(--g-bg);
+    -webkit-backdrop-filter:blur(34px) saturate(200%);backdrop-filter:blur(34px) saturate(200%);
+    border:1px solid var(--g-brd);box-shadow:0 30px 70px -20px rgba(10,20,14,.65),var(--g-spec);
+    transform:translateY(112%) scale(.96);transition:transform .65s var(--spring),visibility .65s}
+  html.sheet-open .app-sheet{transform:none}
+  .sheet-grid a,.sheet-row,:root[data-theme="dark"] .sheet-grid a,:root[data-theme="dark"] .sheet-row{
+    background:radial-gradient(130% 90% at 8% 0%,var(--g-sheen),transparent 55%),var(--g-bg);
+    border:1px solid var(--g-brd);box-shadow:var(--g-spec)}
+  html.sheet-open .sheet-grid a{animation:itemIn .6s var(--spring) both}
+  html.sheet-open .sheet-grid a:nth-child(2n){animation-delay:.06s}
+  html.sheet-open .sheet-grid a:nth-child(3){animation-delay:.1s}
+  html.sheet-open .sheet-grid a:nth-child(4){animation-delay:.14s}
+  html.sheet-open .sheet-grid a:nth-child(n+5){animation-delay:.18s}
+}
+@keyframes itemIn{from{opacity:0;transform:translateY(18px) scale(.92)}to{opacity:1;transform:none}}
+
+/* ---------- ইনস্টল কার্ড ও স্ন্যাকবার ---------- */
+.app-install,:root[data-theme="dark"] .app-install{
+  background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,0) 50%),rgba(30,59,42,.74);
+  -webkit-backdrop-filter:blur(22px) saturate(170%);backdrop-filter:blur(22px) saturate(170%);
+  border:1px solid rgba(255,255,255,.22);box-shadow:0 22px 44px -16px rgba(10,25,16,.7),inset 0 1px 0 rgba(255,255,255,.3);border-radius:26px}
+.app-install.show{animation:slideUp .7s var(--spring) both}
+.app-snack,:root[data-theme="dark"] .app-snack{
+  background:rgba(36,26,15,.7);-webkit-backdrop-filter:blur(20px) saturate(160%);backdrop-filter:blur(20px) saturate(160%);
+  border:1px solid rgba(255,255,255,.18);border-radius:22px;box-shadow:0 18px 38px -14px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.22)}
+.app-snack.offline,:root[data-theme="dark"] .app-snack.offline{background:rgba(122,59,31,.74)}
+.app-snack.show{animation:slideUp .6s var(--spring) both}
+
+/* ---------- শেয়ার মডাল ---------- */
+.share-overlay{-webkit-backdrop-filter:blur(16px) saturate(140%);backdrop-filter:blur(16px) saturate(140%)}
+.share-box{border-radius:30px}
+
+/* ---------- মোবাইলে "শিশুকে সুস্থ রাখার টিপস" ---------- */
+@media (max-width:600px){
+  .tip-grid{grid-template-columns:1fr;gap:10px}
+  .tip{display:grid;grid-template-columns:48px 1fr;grid-template-areas:"ic h" "ic p" "ic s";column-gap:14px;row-gap:3px;align-items:start;
+    padding:14px 16px;border-radius:24px}
+  .tip .ic{grid-area:ic;width:48px;height:48px;margin:0;border-radius:50%;font-size:19px}
+  .tip h4{grid-area:h;margin:0;font-size:1.08rem;line-height:1.35;align-self:center}
+  .tip p{grid-area:p;font-size:14px;line-height:1.7}
+  .tip .src{grid-area:s;justify-self:start;margin-top:6px;padding:2px 10px;font-size:11px}
+  .warn-row{grid-template-columns:1fr;gap:12px;margin-top:20px}
+  .warn{padding:18px 16px;border-radius:24px}
+  .warn h4{font-size:1.15rem;margin-bottom:10px}
+  .warn li{font-size:15px;padding-bottom:9px;line-height:1.65}
+  .dont{padding:18px 16px;border-radius:24px;margin-top:12px}
+  .dont h4{font-size:1.12rem}
+  .dont p{font-size:14.5px;line-height:1.75}
+  .chart-card,.track-shell,.recipe,.ms-shell{border-radius:26px}
+}
+@media (min-width:601px) and (max-width:900px){
+  .tip-grid{grid-template-columns:repeat(2,1fr)}
+}
+
+/* ---------- ব্যাকড্রপ সাপোর্ট না থাকলে ফলব্যাক ---------- */
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  :root{--g-bar:rgba(255,252,244,.96)}
+  :root[data-theme="dark"]{--g-bar:rgba(22,28,21,.96)}
+  .app-sheet{background:var(--cream)}
+}
+
+/* ---------- কম মোশন / প্রিন্ট ---------- */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+@media print{
+  body::before,.app-tabs::after{display:none!important}
+  *{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+  .chart-card,.track-shell,.recipe,.tip,.warn,.dont{background:#fff!important;box-shadow:none!important}
+}
+
+/* ---------- সূক্ষ্ম সংশোধন ---------- */
+:root{--g-bar:rgba(255,252,244,.7)}
+:root[data-theme="dark"]{--g-bar:rgba(22,28,21,.68)}
+:root[data-theme="dark"] .tip .ic,:root[data-theme="dark"] .pcard .icon{
+  background:linear-gradient(145deg,rgba(134,199,158,.38),rgba(134,199,158,.14));color:#CFF5DB;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.28),0 8px 16px -8px rgba(0,0,0,.7)}
+:root[data-theme="dark"] .pcard .icon{background:linear-gradient(145deg,rgba(239,192,111,.4),rgba(239,192,111,.14));color:#FFE2A8}
+:root[data-theme="dark"] .tip .src{background:rgba(232,130,91,.16);border-color:rgba(255,255,255,.14);color:#F2A586}
+:root[data-theme="dark"] .tip h4,:root[data-theme="dark"] .warn h4{color:var(--ink)}
+:root[data-theme="dark"] .warn.good{background:radial-gradient(130% 90% at 8% 0%,var(--g-sheen),transparent 55%),rgba(134,199,158,.16)}
+:root[data-theme="dark"] .warn.bad,:root[data-theme="dark"] .dont{background:radial-gradient(130% 90% at 8% 0%,var(--g-sheen),transparent 55%),rgba(232,130,91,.16)}
+:root[data-theme="dark"] .app-tab.on{color:#BFF0CF}
+.app-tab:focus{outline:none}
+.app-tab:focus-visible{outline:2px solid var(--green-2,#2E5B40);outline-offset:-4px;border-radius:28px}
