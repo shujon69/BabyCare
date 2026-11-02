@@ -2,7 +2,7 @@
    sw.js v2 — অফলাইন ক্যাশ, দ্রুত লোড, আপডেট, নোটিফিকেশন ক্লিক
    নতুন কিছু deploy করলে শুধু নিচের VERSION নম্বর বাড়াবেন।
    ============================================================ */
-var VERSION = 'v3';
+var VERSION = 'v7';
 var CORE = 'babycare-core-' + VERSION;
 var RUNTIME = 'babycare-runtime-' + VERSION;
 
@@ -11,12 +11,16 @@ var ASSETS = [
   './index.html',
   './css/style.css',
   './css/app.css',
+  './css/glass.css',
+  './css/footer.css',
+  './css/theme.css',
   './js/data.js',
   './js/app.js',
   './js/tracker.js',
   './js/features.js',
   './js/main.js',
   './js/app-shell.js',
+  './js/fx.js',
   './manifest.json',
   './icon-192.png',
   './icon-512.png',
